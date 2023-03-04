@@ -7,6 +7,7 @@ let first = true; // checks if its the first iteration
 // analysis
 let t = 0;
 let dt = 0;
+let handsUpTime = 0;
 let info = {
     headTurn: {
         name: "Head Turning",
@@ -119,6 +120,9 @@ function checkHeadTurn(){
     if (headTurnSec >= 3) {
         // REPORT
         info.headTurnRep.val++;
+        if(info.headTurnRep.val!=0 && info.headTurnRep.val%3==0){
+            alert("Person #1 has been turning their head a suspicious amount of times");
+        }
         headTurnSec = 0;
     }
 }
@@ -129,8 +133,15 @@ function checkHandsUp(){
     let wrist = (poses[0].pose.leftWrist.y+poses[0].pose.rightWrist.y)/2;
     let eye = (poses[0].pose.leftEye.y+poses[0].pose.rightEye.y)/2;
     console.log("Wrist:"+eye + " " + wrist);
+    console.log("Hands Up Time:" + handsUpTime);
     if(wrist>eye+50){
         info.handsUp.val = 0;
+        handsUpTime++;
+        if(handsUpTime>40 && handsUpTime<10000){
+            alert("Person #1 has been holding their hands up for a suspicous amount of time");
+            handsUpTime = 0;
+        }
+
     } else{
         info.handsUp.val = 1;
     }
