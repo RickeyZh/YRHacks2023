@@ -77,10 +77,10 @@ function checkHeadTurn(){
     let dLeftEye = abs(poses[0].pose.leftEye.x-prevPose[0].pose.leftEye.x);
     let dRightEye = abs(poses[0].pose.rightEye.x-prevPose[0].pose.rightEye.x);
 
-    if(dLeftEye>10 && dRightEye<=9){ // check turn vs move
+    if(dLeftEye>=15 && dLeftEye-dRightEye>=5){ // check turn vs move
         headTurns++;
         info.headTurning = 1;
-    } else if(dRightEye>10 && dLeftEye<=9){
+    } else if(dRightEye>=15 && dRightEye-dLeftEye>=5){
         headTurns++;
         info.headTurning = 1;
     } else {
