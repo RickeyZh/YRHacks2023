@@ -18,6 +18,11 @@ let info = {
         name: "Suspicious Head Turning",
         val: 0,
         trgVal: 1
+    },
+    handsUp: {
+        name: "Hands up",
+        val: 0,
+        trgVal: 0.001
     }
 };
 
@@ -46,6 +51,7 @@ function draw() {
 
     // process
     baseProcess();
+    checkHandsUp();
     if(!first){
         // put all checkers here
         checkHeadTurn();
@@ -104,13 +110,13 @@ function checkHeadTurn(){
             currInfo.val -= dt;
             currInfo.val = max(0, currInfo.val);
         }
-        console.log(dLeftEye + " " + dRightEye);
+        //console.log(dLeftEye + " " + dRightEye);
     }
 
     // turning significant?
     {
         let currInfo = info.headTurnSus;
-        console.log("head turns: "+headTurns);
+        //console.log("head turns: "+headTurns);
         if (headTurns >= 5){
             // CALL A FUNCTION TO NOTIFY
             headTurns = 0;
@@ -120,6 +126,19 @@ function checkHeadTurn(){
             currInfo.val = max(0, currInfo.val);
         }
     }
+}
+function checkHandsUp(){
+    if(poses.length==0 || poses[0].pose.leftWrist.confidence<0.01 || poses[0].pose.rightWrist.confidence<0.01) return;
+    let wrist = (poses[0].pose.leftWrist.y+poses[0].pose.rightWrist.y)/2;
+    let eye = (poses[0].pose.leftEye.y+poses[0].pose.rightEye.y)/2;
+    console.log("Wrist:"+eye + " " + wrist);
+    if(wrist>eye+50){
+        info.handsUp.val = 0;
+    }
+    else{
+        info.handsUp.val = 1;
+    }
+
 }
 
 // display info
