@@ -129,3 +129,18 @@ img {
     opacity: 50%;
     
 }
+
+#logo{
+    color: rgb(0, 115, 255);
+}
+
+#proj-btn{
+    display: inline flex;
+    border-radius: 999px;
+    font-family: 'Arimo', sans-serif;
+    font-weight: 200;
+}
+
+#proj-btn:hover{
+    cursor: pointer;
+}
