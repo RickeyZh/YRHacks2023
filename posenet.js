@@ -58,7 +58,7 @@ function draw() {
     drawKeypoints();
 }
 function modelReady(){
-    select("#status").html("model Loaded");
+    select("#status").html("");
 }
 function drawKeypoints(){
     for(let i=0; i<poses.length; i++){
