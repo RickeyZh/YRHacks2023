@@ -3,11 +3,11 @@ const follow = document.getElementById("cursor-follow");
 document.body.onpointermove = event =>{
     
 
-        const {clientX, clientY} = event;
+        const {pageX, pageY} = event;
         
         follow.animate({
-            left: `${clientX}px`,
-            top: `${clientY}px`
+            left: `${pageX}px`,
+            top: `${pageY}px`
         },{
             duration:2200, fill:"forwards"
         })
