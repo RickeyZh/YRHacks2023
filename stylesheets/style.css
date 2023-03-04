@@ -30,8 +30,8 @@ body{
     border-radius: 50%;
     background: linear-gradient(
         to right,
-        aquamarine,
-        mediumpurple
+        purple,
+        blue
     );
     animation: rotate ease 7s infinite;
     z-index: -2;
@@ -77,7 +77,7 @@ body{
 }
 
 .top-wave-hero .shape-fill {
-    fill: #00346D;
+    fill: #0e2181;
 }
 
 h1{
