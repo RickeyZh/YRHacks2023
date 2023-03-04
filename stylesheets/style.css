@@ -1,26 +1,29 @@
-*{
+* {
     overflow: hidden;
 }
-body{
+
+body {
     height: 100vh;
     margin: 0rem;
 
     background-color: rgb(26, 26, 26) !important;
 }
+
 @keyframes rotate {
-    from{
-        rotate:0deg;
+    from {
+        rotate: 0deg;
     }
 
-    50%{
+    50% {
         scale: 1 1.2;
     }
 
-    to{
-        rotate:360deg;
+    to {
+        rotate: 360deg;
     }
 }
-#cursor-follow{
+
+#cursor-follow {
     height: 400px;
     aspect-ratio: 1;
     position: absolute;
@@ -28,37 +31,98 @@ body{
     top: 50%;
     translate: -50% -50%;
     border-radius: 50%;
-    background: linear-gradient(
-        to right,
-        purple,
-        blue
-    );
+    background: linear-gradient(to right,
+            purple,
+            blue);
     animation: rotate ease 7s infinite;
     z-index: -2;
     opacity: 100%;
 }
-#blur{
+
+#blur {
     height: 2000px;
     width: 100%;
     position: absolute;
     z-index: -1;
     backdrop-filter: blur(10vw);
 }
-.split-text{
+
+@media(min-width:828px) {
+    .split-text {
+        font-size: 108px !important;
+    }
+
+    img {
+        width: 500px !important;
+        height: 400px !important;
+    }
+
+    #proj-btn {
+        display: inline-flex !important;
+        position: static !important;
+    }
+
+    .top {
+        text-indent: 10%;
+    }
+
+    .bot {
+        text-indent: 20%;
+    }
+}
+
+@media(min-width:600px) {
+    .split-text {
+        font-size: 300%;
+    }
+
+    img {
+        width: 60vw;
+        height: 50vh;
+    }
+
+    #proj-btn {
+        position: absolute;
+        top: 340px;
+        left: 15px;
+    }
+}
+
+@media(max-width:599px) {
+    .split-text {
+        font-size: 300%;
+    }
+
+    img {
+        width: 50vw;
+        height: 30vh;
+    }
+
+    #proj-btn {
+        position: absolute;
+        top: 340px;
+        left: 15px;
+    }
+}
+
+.split-text {
     font-family: 'Tilt Warp', cursive;
-    font-size: 108px !important;
     color: white !important;
 }
-#text-contain{
+
+#text-contain {
     line-height: 1.1 !important;
+    padding-left: 10px;
 }
-#home-img{
+
+#home-img {
     position: absolute;
-    top: 0 ;
+    top: 0;
     left: 0;
     height: 400px;
     width: 600px;
 }
+
 .top-wave-hero {
     position: absolute;
     bottom: 0;
@@ -80,9 +144,10 @@ body{
     fill: #471d8f;
 }
 
-h1{
+h1 {
     font-family: 'Golos Text', sans-serif;
 }
+
 .bottom-wave-about {
     position: absolute;
     top: 0;
@@ -99,18 +164,13 @@ h1{
     height: 188px;
 }
 
-.top{
-    text-indent: 10%;
-}
-.bot{
-    text-indent: 20%;
-}
-#text-contain{
+
+#text-contain {
     width: 830px;
-    
+
 }
 
-#st-con{
+#st-con {
     display: flex;
 }
 
@@ -118,29 +178,109 @@ img {
     z-index: -1;
     left: 32%;
     top: 17%;
-    width: 500px;
-    height: 400px;
+
     position: absolute;
     border-radius: 40px;
     opacity: 50%;
-    
-}
 
-#logo{
+}
+a{
+    text-decoration: none !important;
+}
+#logo {
     color: rgb(0, 115, 255);
+    left: 80%;
+    padding-right: 10px;
 }
 
-#proj-btn{
+#proj-btn {
     display: inline flex;
     border-radius: 999px;
     font-family: 'Arimo', sans-serif;
     font-weight: 200;
 }
 
-#proj-btn:hover{
+#proj-btn:hover {
     cursor: pointer;
 }
 
-#title-test{
+#title-test {
     margin-top: 50px !important;
 }
+.mob {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: block;
+    background-color: transparent;
+
+    font-family: inherit;
+    font-size: 100%;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+    margin: 10px;
+    padding: 0;
+  }
+  
+  .mob-top,
+  .mob-mid,
+  .mob-bot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background: rgb(255, 255, 255);
+    transform: rotate(0);
+    transition: all 0.5s;
+  }
+  .mob:focus{
+    outline: none;
+  }
+  .mob-mid {
+    transform: translateY(7px);
+  }
+  .mob-bot {
+    transform: translateY(14px);
+  }
+  .open {
+    transform: rotate(90deg);
+    transform: translateY(0px);
+  }
+  .open .mob-top {
+    transform: rotate(45deg) translateY(6px) translate(6px);
+  }
+  
+  .open .mob-mid {
+    display: none;
+  }
+  .open .mob-bot {
+    transform: rotate(-45deg) translateY(6px) translate(-6px);
+  }
+  
+  .menu-active {
+    transform: scale(0.9);
+    transition: all 1s;
+  }
+  
+  .menu-inactive {
+    transform: scale(0);
+    transition: all 1s;
+  }
+
+  #menu{
+    position: absolute !important;
+    display: flex;
+    flex-direction: column;
+    align-self: self-end;
+    padding-top: 8px;
+    justify-content: center;
+    padding-left: 6px;
+  }
+
+  .hid{
+    color: white;
+    font-size: 20px;
+  }

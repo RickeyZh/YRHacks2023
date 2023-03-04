@@ -59,11 +59,13 @@
       .mySlides {
         display: none;
       }
+
       .center {
         font-family: "Tilt Warp", cursive;
         text-align: right;
         font-size: 29px;
       }
+
       .font {
         font-family: "Tilt Warp", cursive;
       }
@@ -73,36 +75,57 @@
   <body bgcolor="#add8e6">
     <div id="cursor-follow"></div>
     <div id="blur"></div>
-    <div class="w3-top">
-      <div class="w3-bar w3-black w3-card">
-        <a
-          class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
-          href="javascript:void(0)"
-          onclick="myFunction()"
-          title="Toggle Navigation Menu"
-          ><i class="fa fa-bars"></i
-        ></a>
-        <a href="#" class="w3-bar-item w3-button w3-padding-large">
-          <div class="font">HOME</div>
+
+    <!-- nav -->
+    <div class="w3-bar w3-black w3-card w3-hide-small d-flex position-relative">
+      <a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">
+        <div class="font">HOME</div>
+      </a>
+      <a
+        href="test.html"
+        class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+      >
+        <div class="font">CAMERA</div>
+      </a>
+      <a
+        href="index.html"
+        class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+      >
+        <div class="font">SIGN OUT</div>
+      </a>
+
+      <div class="center w3-hide-small position-absolute" id="logo">
+        IWitness&nbsp&nbsp&nbsp
+      </div>
+
+      <a>
+        <link
+          href="https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css"
+          rel="stylesheet"
+        />
+      </a>
+      <!-- mobile menu -->
+
+      <button id="menu-btn" class="mob w3-hide-large w3-hide-medium">
+        <span class="mob-top"></span>
+        <span class="mob-mid"></span>
+        <span class="mob-bot"></span>
+      </button>
+
+      <!-- mobile menu end -->
+    </div>
+
+    <!-- end nav -->
+    <div class="w3-hide-medium">
+      <div id="menu" class="menu-inactive">
+        <a href="index.html">
+          <div class="font hid">HOME</div>
         </a>
-        <a
-          href="test.html"
-          class="w3-bar-item w3-button w3-padding-large w3-hide-small"
-          ><div class="font">CAMERA</div></a
-        >
-        <a
-          href="index.html"
-          class="w3-bar-item w3-button w3-padding-large w3-hide-small"
-          ><div class="font">SIGN OUT</div></a
-        >
-        <a>
-          <div class="center" id="logo">IWitness&nbsp&nbsp&nbsp</div>
+        <a href="index.html">
+          <div class="font hid">CAMERA</div>
         </a>
-        <a>
-          <link
-            href="https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css"
-            rel="stylesheet"
-          />
+        <a href="index.html">
+          <div class="font hid">SIGN OUT</div>
         </a>
       </div>
     </div>
@@ -121,7 +144,7 @@
               Next-gen
               <button type="button" class="btn btn-warning" id="proj-btn">
                 <a class="btn" href="https://github.com/RickeyZh/YRHacks2023"
-                  >See project details</a
+                  >See source code</a
                 >
               </button>
             </div>
@@ -129,7 +152,7 @@
           </div>
         </div>
 
-        <div class="top-wave-hero">
+        <div class="top-wave-hero d-md-none d-sm-none d-lg-block">
           <svg
             data-name="Layer 1"
             xmlns="http://www.w3.org/2000/svg"
