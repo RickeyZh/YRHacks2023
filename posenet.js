@@ -9,7 +9,14 @@ let t = 0;
 let dt = 0;
 let headTurns = 0;
 let info = {
-    headTurning: 0,
+    headTurn: {
+        name: "Head Turning",
+        val: 0
+    },
+    headTurnSus: {
+        name: "Suspicious Head Turning",
+        val: 0
+    }
 };
 
 // runs on start
@@ -65,43 +72,66 @@ function drawKeypoints(){
     }
 }
 
-// CHECKERS
+// PROCESSING
+
+// processing to be run first
 function baseProcess() {
     let t0 = t;
     t = performance.now()*0.001;
     dt = t-t0;
     console.log("time: "+t+" "+dt);
 }
+
+// head turn
 function checkHeadTurn(){
+    // get input
     if(poses.length==0 || prevPose.length==0) return;
     let dLeftEye = abs(poses[0].pose.leftEye.x-prevPose[0].pose.leftEye.x);
     let dRightEye = abs(poses[0].pose.rightEye.x-prevPose[0].pose.rightEye.x);
 
-    if(dLeftEye>=15 && dLeftEye-dRightEye>=5){ // check turn vs move
-        headTurns++;
-        info.headTurning = 1;
-    } else if(dRightEye>=15 && dRightEye-dLeftEye>=5){
-        headTurns++;
-        info.headTurning = 1;
-    } else {
-        info.headTurning -= dt;
-        info.headTurning = max(0, info.headTurning);
+    // is turning?
+    {
+        let currInfo = info.headTurn;
+        if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
+            headTurns++;
+            currInfo.val = 1;
+        } else if(dRightEye >= 15 && dRightEye-dLeftEye >= 5){
+            headTurns++;
+            currInfo.val = 1;
+        } else {
+            currInfo.val -= dt;
+            currInfo.val = max(0, currInfo.val);
+        }
+        console.log(dLeftEye + " " + dRightEye);
     }
-    console.log(dLeftEye + " " + dRightEye);
 
-    console.log("head turns: "+headTurns);
-    if(headTurns >= 5){
-        // CALL A FUNCTION TO NOTIFY
-        headTurns = 0;
-    } else {
-        
+    // turning significant?
+    {
+        let currInfo = info.headTurnSus;
+        console.log("head turns: "+headTurns);
+        if (headTurns >= 5){
+            // CALL A FUNCTION TO NOTIFY
+            headTurns = 0;
+            currInfo.val = 1;
+        } else {
+            currInfo.val -= dt;
+            currInfo.val = max(0, currInfo.val);
+        }
     }
 }
+
+// display info
 function displayInfo() {
     let temp = "";
     for (let key in info) {
-        if (info[key] > 0) {temp += key+": true";}
-        else {temp += key+": false";}
+        let elem = info[key];
+        if (typeof(elem.name) != "string") {elem.name = "(invalid name) "+key;}
+        if (typeof(elem.val) != "number") {elem.val = 0;}
+
+        // add text
+        if (elem.val > 0) {temp += elem.name+": true";}
+        else {temp += elem.name+": false";}
+        temp += "\n";
     }
     select("#info-body").html(temp);
 }
