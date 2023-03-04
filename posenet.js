@@ -144,10 +144,10 @@ function checkHandsUp() {
     let wrist = (poses[0].pose.leftWrist.y+poses[0].pose.rightWrist.y)/2;
     let eye = (poses[0].pose.leftEye.y+poses[0].pose.rightEye.y)/2;
     if(wrist > eye+50){
-        info.handsUp.val = 0;
+        info.handsUp.val = false;
         handsUpTime = 0;
     } else{
-        info.handsUp.val = 1;
+        info.handsUp.val = true;
         handsUpTime += dt;
         if(handsUpTime >= 5){
             alert("Person #1 has been holding their hands up for a suspicious amount of time.");
