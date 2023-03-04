@@ -1,4 +1,48 @@
-*{
-    border: 0;
-    padding: none;
+body{
+    height: 100vh;
+    margin: 0rem;
+    overflow: hidden; 
+    background-color: rgb(26, 26, 26) !important;
+}
+@keyframes rotate {
+    from{
+        rotate:0deg;
+    }
+
+    50%{
+        scale: 1 1.2;
+    }
+
+    to{
+        rotate:360deg;
+    }
+}
+#cursor-follow{
+    height: 400px;
+    aspect-ratio: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: linear-gradient(
+        to right,
+        aquamarine,
+        mediumpurple
+    );
+    animation: rotate ease 20s infinite;
+    z-index: -2;
+    opacity: 100%;
+}
+#blur{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    backdrop-filter: blur(10vw);
+}
+.display-1{
+    font-family: 'Tilt Warp', cursive;
+    font-size: 120px;
+    color: white !important;
 }
