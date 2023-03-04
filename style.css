@@ -1,7 +1,7 @@
 body{
     height: 100vh;
     margin: 0rem;
-    overflow: hidden; 
+    /* overflow: hidden;  */
     background-color: rgb(26, 26, 26) !important;
 }
 @keyframes rotate {
@@ -46,3 +46,46 @@ body{
     font-size: 120px;
     color: white !important;
 }
+#home-img{
+    position: absolute;
+    top: 0 ;
+    left: 0;
+    height: 400px;
+    width: 600px;
+}
+.custom-shape-divider-bottom-1677894750 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1677894750 svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.custom-shape-divider-bottom-1677894750 .shape-fill {
+    fill: #00346D;
+}
+
+#cards{
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;  
+    max-width: 916px;
+    width: calc(100% - 20px);
+}
+.card {
+    background-color: rgb(255, 255, 255, 0.1);
+    opacity: 10%;
+    border-radius: 10px;
+    height: 260px;
+    width:300px;
+  }
