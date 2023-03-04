@@ -3,11 +3,11 @@ let poseNet;
 let poses = [];
 let prevPose = [];
 let first = true; // checks if its the first iteration
+let sound = new Audio("assets/ringSoundEffect.mp3");
 
 // analysis
 let t = 0;
 let dt = 0;
-let handsUpTime = 0;
 let info = {
     headTurn: {
         name: "Head Turning",
@@ -25,6 +25,12 @@ let info = {
     },
     handsUp: {
         name: "Hands up",
+        show: true,
+        val: 0,
+        format: undefined
+    },
+    fallRep: {
+        name: "Fall Reports",
         show: true,
         val: 0,
         format: undefined
@@ -60,6 +66,7 @@ function draw() {
         // put all checkers here
         checkHeadTurn();
         checkHandsUp();
+        checkFall();
     }
     first = false;
     prevPose = poses;
@@ -92,11 +99,11 @@ function baseProcess() {
     let t0 = t;
     t = performance.now()*0.001;
     dt = t-t0;
-    // console.log("time: "+t+" "+dt);
 }
 
 // head turn
 let headTurnSec = 0;
+let headTurnDelay = 0;
 function checkHeadTurn(){
     // get input
     if(poses.length == 0 || prevPose.length == 0) return;
@@ -107,44 +114,69 @@ function checkHeadTurn(){
     let iTurn = info.headTurn;
     if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
         iTurn.val = 1;
+        headTurnDelay = 0;
     } else if(dRightEye >= 15 && dRightEye-dLeftEye >= 5){
         iTurn.val = 1;
+        headTurnDelay = 0;
     } else {
         iTurn.val = max(0, iTurn.val-dt);
+        headTurnDelay += dt;
     }
-    // console.log(dLeftEye + " " + dRightEye);
 
     // turning report
+    if (headTurnDelay >= 15) { // reset turn sec after 15 seconds of no activity
+        headTurnSec = 0;
+        headTurnDelay = 0;
+        console.log("Head turn seconds is being reset.");
+    }
     headTurnSec += dt*(iTurn.val);
-    console.log(headTurnSec+" "+info.headTurnRep);
     if (headTurnSec >= 3) {
         // REPORT
         info.headTurnRep.val++;
-        if(info.headTurnRep.val!=0 && info.headTurnRep.val%3==0){
-            alert("Person #1 has been turning their head a suspicious amount of times");
-        }
         headTurnSec = 0;
+        alert("Person #1 has been turning their head a suspicious number of times.");
+        sound.play();
     }
 }
 
 // hands up
-function checkHandsUp(){
+let handsUpTime = 0;
+function checkHandsUp() {
     if(poses.length == 0 || poses[0].pose.leftWrist.confidence < 0.01 || poses[0].pose.rightWrist.confidence < 0.01) return;
     let wrist = (poses[0].pose.leftWrist.y+poses[0].pose.rightWrist.y)/2;
     let eye = (poses[0].pose.leftEye.y+poses[0].pose.rightEye.y)/2;
-    console.log("Wrist:"+eye + " " + wrist);
-    console.log("Hands Up Time:" + handsUpTime);
-    if(wrist>eye+50){
-        info.handsUp.val = 0;
-        handsUpTime++;
-        if(handsUpTime>40 && handsUpTime<10000){
-            alert("Person #1 has been holding their hands up for a suspicous amount of time");
-            handsUpTime = 0;
-        }
-
+    if(wrist > eye+50){
+        info.handsUp.val = false;
+        handsUpTime = 0;
     } else{
-        info.handsUp.val = 1;
+        info.handsUp.val = true;
+        handsUpTime += dt;
+        if(handsUpTime >= 5){
+            handsUpTime = 0;
+            alert("Person #1 has been holding their hands up for a suspicious amount of time.");
+            sound.play();
+
+        }
     }
+}
+
+// fall
+let fallDealy = 15;
+function checkFall() {
+    if(poses.length == 0 || prevPose.length == 0) return;
+    let pose1 = poses[0].pose;
+    let pose0 = prevPose[0].pose;
+    let head1 = (pose1.leftEye.y+pose1.rightEye.y + pose1.nose.y + pose1.leftEar.y+pose1.rightEar.y)/5;
+    let head0 = (pose0.leftEye.y+pose0.rightEye.y + pose0.nose.y + pose0.leftEar.y+pose0.rightEar.y)/5;
+    let dHead = (head1-head0)*dt;
+    if (dHead >= 0.6 && fallDealy >= 2) {
+        fallDealy = 0;
+        info.fallRep.val++;
+        alert("Person #1 may have suspiciously fallen over.");
+    } else {
+        fallDealy += dt;
+    }
+    console.log(dHead);
 }
 
 // display info
