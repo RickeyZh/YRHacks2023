@@ -1,0 +1,1 @@
+const tf = require("@tensorflow-models/posenet");
