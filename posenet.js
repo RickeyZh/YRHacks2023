@@ -17,7 +17,7 @@ function setup() {
         poses = results;
     });
     console.log(poses)
-    //video.hide();
+    video.hide();
 }
 
 function draw() {
