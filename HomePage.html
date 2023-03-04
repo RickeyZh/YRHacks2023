@@ -12,7 +12,7 @@ body {font-family: "Monospace", sans-serif}
 .mySlides {display: none}
 </style>
 </head>
-<body>
+<body bgcolor="#add8e6">
 
 <div class="w3-top">
   <div class="w3-bar w3-black w3-card">
@@ -21,8 +21,50 @@ body {font-family: "Monospace", sans-serif}
     <a href="#PAGE1" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PAGE1</a>
     <a href="#PAGE2" class="w3-bar-item w3-button w3-padding-large w3-hide-small">PAGE2</a>
     <a href="#PAGE#" class="w3-bar-item w3-button w3-padding-large w3-hide-small">LOGIN</a>
+    <a>
+      <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css' rel='stylesheet'>
+    </a>
   </div>
 </div>
 </div>
 </body>
 </html>
+<style>
+  .gg-log-in {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs,1));
+    width: 6px;
+    height: 16px;
+    border: 2px solid;
+    border-left: 0;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    margin-right: -10px
+}
+.gg-log-in::after,
+.gg-log-in::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute
+}
+.gg-log-in::after {
+    border-top: 2px solid;
+    border-right: 2px solid;
+    transform: rotate(45deg);
+    width: 8px;
+    height: 8px;
+    left: -8px;
+    bottom: 2px
+}
+.gg-log-in::before {
+    border-radius: 3px;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+    left: -11px;
+    bottom: 5px
+}
+</style>
