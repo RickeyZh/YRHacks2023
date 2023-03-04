@@ -13,6 +13,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@500&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="stylesheets/style.css" />
     <link rel="stylesheet" href="stylesheets/ay-style.css" />
 
@@ -41,6 +45,12 @@
     />
     <!-- end bootstrap -->
     <script defer src="sctipt1.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.3.min.js"
+      integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+      crossorigin="anonymous"
+    ></script>
+    <script defer src="imgMove.js"></script>
     <style>
       body {
         font-family: "Monospace", sans-serif;
@@ -50,12 +60,12 @@
         display: none;
       }
       .center {
-        font-family: 'Tilt Warp', cursive;
+        font-family: "Tilt Warp", cursive;
         text-align: right;
         font-size: 29px;
       }
-      .font{
-        font-family: 'Tilt Warp', cursive;
+      .font {
+        font-family: "Tilt Warp", cursive;
       }
     </style>
   </head>
@@ -86,9 +96,7 @@
           ><div class="font">SIGN OUT</div></a
         >
         <a>
-          <div class="center">
-            IWitness&nbsp&nbsp&nbsp
-          </div>
+          <div class="center" id="logo">IWitness&nbsp&nbsp&nbsp</div>
         </a>
         <a>
           <link
@@ -101,19 +109,25 @@
     <!-- hero section -->
     <section class="hero py-5">
       <div class="container-fluid">
-        <!-- <img src="assets/testimg.jpg" alt="" id="stare" /> -->
+        <!-- moving perspetcive img -->
+        <div id="st-con">
+          <img src="assets/camera.jpg" alt="" id="stare" />
+        </div>
+        <!--  -->
         <div class="text-light mt-5 py-5 d-flex justify-content-center">
           <div id="text-contain">
-            <div class="split-text">Welcome to</div>
-            <div class="split-text me-3">Next-gen</div>
-            <div class="split-text">Surveillance</div>
+            <div class="split-text top">Welcome to</div>
+            <div class="split-text mid">
+              Next-gen
+              <button type="button" class="btn btn-warning" id="proj-btn">
+                <a class="btn" href="https://github.com/RickeyZh/YRHacks2023"
+                  >See project details</a
+                >
+              </button>
+            </div>
+            <div class="split-text bot">Surveillance</div>
           </div>
         </div>
-        <!-- <button type="button" class="btn btn-primary">
-          <a class="btn" href="https://github.com/RickeyZh/YRHacks2023"
-            >See project details</a
-          >
-        </button> -->
 
         <div class="top-wave-hero">
           <svg
