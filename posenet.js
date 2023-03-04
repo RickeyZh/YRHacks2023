@@ -7,22 +7,26 @@ let first = true; // checks if its the first iteration
 // analysis
 let t = 0;
 let dt = 0;
-let headTurns = 0;
 let info = {
     headTurn: {
         name: "Head Turning",
+        show: true,
         val: 0,
-        trgVal: 0.001
+        format: function(x) {
+            return x > 0;
+        }
     },
-    headTurnSus: {
-        name: "Suspicious Head Turning",
+    headTurnRep: {
+        name: "Head Turning Reports",
+        show: true,
         val: 0,
-        trgVal: 1
+        format: undefined
     },
     handsUp: {
         name: "Hands up",
+        show: true,
         val: 0,
-        trgVal: 0.001
+        format: undefined
     }
 };
 
@@ -41,7 +45,7 @@ function setup() {
     poseNet.on("pose", function(results) {
         poses = results;
     });
-    console.log(poses);
+    // console.log(poses);
     video.hide();
 }
 
@@ -51,10 +55,10 @@ function draw() {
 
     // process
     baseProcess();
-    checkHandsUp();
     if(!first){
         // put all checkers here
         checkHeadTurn();
+        checkHandsUp();
     }
     first = false;
     prevPose = poses;
@@ -87,10 +91,11 @@ function baseProcess() {
     let t0 = t;
     t = performance.now()*0.001;
     dt = t-t0;
-    console.log("time: "+t+" "+dt);
+    // console.log("time: "+t+" "+dt);
 }
 
 // head turn
+let headTurnSec = 0;
 function checkHeadTurn(){
     // get input
     if(poses.length==0 || prevPose.length==0) return;
@@ -98,47 +103,37 @@ function checkHeadTurn(){
     let dRightEye = abs(poses[0].pose.rightEye.x-prevPose[0].pose.rightEye.x);
 
     // is turning?
-    {
-        let currInfo = info.headTurn;
-        if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
-            headTurns++;
-            currInfo.val = 1;
-        } else if(dRightEye >= 15 && dRightEye-dLeftEye >= 5){
-            headTurns++;
-            currInfo.val = 1;
-        } else {
-            currInfo.val -= dt;
-            currInfo.val = max(0, currInfo.val);
-        }
-        //console.log(dLeftEye + " " + dRightEye);
+    let iTurn = info.headTurn;
+    if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
+        iTurn.val = 1;
+    } else if(dRightEye >= 15 && dRightEye-dLeftEye >= 5){
+        iTurn.val = 1;
+    } else {
+        iTurn.val = max(0, iTurn.val-dt);
     }
+    // console.log(dLeftEye + " " + dRightEye);
 
-    // turning significant?
-    {
-        let currInfo = info.headTurnSus;
-        //console.log("head turns: "+headTurns);
-        if (headTurns >= 5){
-            // CALL A FUNCTION TO NOTIFY
-            headTurns = 0;
-            currInfo.val = 1;
-        } else {
-            currInfo.val -= dt;
-            currInfo.val = max(0, currInfo.val);
-        }
+    // turning report
+    headTurnSec += dt*(iTurn.val);
+    console.log(headTurnSec+" "+info.headTurnRep);
+    if (headTurnSec >= 3) {
+        // REPORT
+        info.headTurnRep.val++;
+        headTurnSec = 0;
     }
 }
+
+// hands up
 function checkHandsUp(){
-    if(poses.length==0 || poses[0].pose.leftWrist.confidence<0.01 || poses[0].pose.rightWrist.confidence<0.01) return;
+    if(poses.length == 0 || poses[0].pose.leftWrist.confidence < 0.01 || poses[0].pose.rightWrist.confidence < 0.01) return;
     let wrist = (poses[0].pose.leftWrist.y+poses[0].pose.rightWrist.y)/2;
     let eye = (poses[0].pose.leftEye.y+poses[0].pose.rightEye.y)/2;
     console.log("Wrist:"+eye + " " + wrist);
     if(wrist>eye+50){
         info.handsUp.val = 0;
-    }
-    else{
+    } else{
         info.handsUp.val = 1;
     }
-
 }
 
 // display info
@@ -147,12 +142,17 @@ function displayInfo() {
     for (let key in info) {
         let elem = info[key];
         if (typeof(elem.name) != "string") {elem.name = "(invalid name) "+key;}
-        if (typeof(elem.val) != "number") {elem.val = 0;}
+        if (typeof(elem.show) != "boolean") {elem.show = false;}
 
         // add text
-        if (elem.val >= elem.trgVal) {temp += elem.name+": true";}
-        else {temp += elem.name+": false";}
-        temp += "\n";
+        if (elem.show) {
+            if (typeof(elem.format) == "function") {
+                temp += elem.name+": "+elem.format(elem.val);
+            } else {
+                temp += elem.name+": "+elem.val;
+            }
+            temp += "<br>";
+        }
     }
     select("#info-body").html(temp);
 }
