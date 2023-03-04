@@ -77,7 +77,7 @@ body{
 }
 
 .top-wave-hero .shape-fill {
-    fill: #0e2181;
+    fill: #471d8f;
 }
 
 h1{
@@ -97,10 +97,6 @@ h1{
     display: block;
     width: calc(100% + 1.3px);
     height: 188px;
-}
-
-.bottom-wave-about .shape-fill {
-    fill: #97a5b5;
 }
 
 .top{
