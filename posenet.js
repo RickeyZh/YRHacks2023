@@ -3,6 +3,7 @@ let poseNet;
 let poses = [];
 let prevPose = [];
 let first = true; // checks if its the first iteration
+let sound = new Audio("assets/ringSoundEffect.mp3");
 
 // analysis
 let t = 0;
@@ -134,6 +135,7 @@ function checkHeadTurn(){
         info.headTurnRep.val++;
         headTurnSec = 0;
         alert("Person #1 has been turning their head a suspicious number of times.");
+        sound.play();
     }
 }
 
@@ -152,6 +154,8 @@ function checkHandsUp() {
         if(handsUpTime >= 5){
             handsUpTime = 0;
             alert("Person #1 has been holding their hands up for a suspicious amount of time.");
+            sound.play();
+
         }
     }
 }
