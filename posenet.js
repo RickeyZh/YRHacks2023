@@ -98,7 +98,7 @@ function baseProcess() {
 let headTurnSec = 0;
 function checkHeadTurn(){
     // get input
-    if(poses.length==0 || prevPose.length==0) return;
+    if(poses.length == 0 || prevPose.length == 0) return;
     let dLeftEye = abs(poses[0].pose.leftEye.x-prevPose[0].pose.leftEye.x);
     let dRightEye = abs(poses[0].pose.rightEye.x-prevPose[0].pose.rightEye.x);
 
