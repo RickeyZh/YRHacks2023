@@ -53,7 +53,7 @@ body{
     height: 400px;
     width: 600px;
 }
-.custom-shape-divider-bottom-1677894750 {
+.top-wave-hero {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -63,21 +63,44 @@ body{
     transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1677894750 svg {
+.top-wave-hero svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
     height: 150px;
 }
 
-.custom-shape-divider-bottom-1677894750 .shape-fill {
+.top-wave-hero .shape-fill {
     fill: #00346D;
 }
 
 #about{
     overflow-y: visible;
     margin-top: 199px; 
+    padding-top: 100px;
     background-color: #00346D;
     color: white;
-    height: 500px;
+    height: 800px;
+}
+h1{
+    font-family: 'Golos Text', sans-serif;
+}
+.bottom-wave-about {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.bottom-wave-about svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 188px;
+}
+
+.bottom-wave-about .shape-fill {
+    fill: #97a5b5;
 }
