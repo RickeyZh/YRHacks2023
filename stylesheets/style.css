@@ -102,11 +102,30 @@ h1{
 .bottom-wave-about .shape-fill {
     fill: #97a5b5;
 }
-#stare{
+
+.top{
+    text-indent: 10%;
+}
+.bot{
+    text-indent: 20%;
+}
+#text-contain{
+    width: 830px;
+    
+}
+
+#st-con{
+    display: flex;
+}
+
+img {
     z-index: -1;
-    left: 27%;
-    top: 10%;
+    left: 32%;
+    top: 17%;
     width: 500px;
+    height: 400px;
     position: absolute;
     border-radius: 40px;
+    opacity: 50%;
+    
 }
