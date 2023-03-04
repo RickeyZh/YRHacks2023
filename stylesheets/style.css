@@ -1,5 +1,5 @@
 *{
-    overflow-x: hidden;
+    overflow: hidden;
 }
 body{
     height: 100vh;
@@ -44,10 +44,13 @@ body{
     z-index: -1;
     backdrop-filter: blur(10vw);
 }
-.display-1{
+.split-text{
     font-family: 'Tilt Warp', cursive;
-    font-size: 120px;
+    font-size: 108px !important;
     color: white !important;
+}
+#text-contain{
+    line-height: 1.1 !important;
 }
 #home-img{
     position: absolute;
@@ -77,13 +80,6 @@ body{
     fill: #00346D;
 }
 
-#about{
-    margin-top: 199px; 
-    padding-top: 100px;
-    background-color: #00346D;
-    color: white;
-    height: 800px;
-}
 h1{
     font-family: 'Golos Text', sans-serif;
 }
@@ -105,4 +101,12 @@ h1{
 
 .bottom-wave-about .shape-fill {
     fill: #97a5b5;
+}
+#stare{
+    z-index: -1;
+    left: 27%;
+    top: 10%;
+    width: 500px;
+    position: absolute;
+    border-radius: 40px;
 }
