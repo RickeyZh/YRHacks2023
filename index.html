@@ -42,15 +42,21 @@
 	IWitness
  </div>
 <body>
-	<div class="main" style="position:relative; left:-150px; top:20px">  	
+
+	<div class="main" style="position:relative; left:-150px; top:20px">  
     		<input type="checkbox" id="chk" aria-hidden="true">
+
+			<div class="response" style="position:absolute; right:120px; top:20px">
+				<t id="status"></t>
+			</div>	
+
 			<div class="signup">
 				<form>
 					<label for="chk" aria-hidden="true">Sign up</label>
-					<input id = "newUser" type="text" name="txt" placeholder="User name" required>
-					<input id = "newEmail" type="email" name="email" placeholder="Email" required>
-					<input id = "newPassword" type="password" name="pswd" placeholder="Password" required>
-					<button onclick="myFunction()">Sign up</button>
+					<input id = "newUser" type="text" name="txt" placeholder="User name" required="">
+					<input id = "newEmail" type="email" name="email" placeholder="Email" required="">
+					<input id = "newPassword" type="password" name="pswd" placeholder="Password" required="">
+					<button onclick="myFunction(); return false">Sign up</button>
 				</form>
 			</div>
 			<div class="login">
@@ -61,38 +67,48 @@
 				</form>
 				
 				<button onclick="validate()">Login</button>
-				<!--
-					
-                <form action="HomePage.html">
-                    <button>Login</button>
-                </form>
+			</div>
 
-				-->
-			</div>    
 	</div>
 </body>
 </html>
 <script>
   function myFunction() {
+	document.getElementById("status").style.color = "white";
+	document.getElementById("status").innerHTML = "...";
+
 	var username = (document.getElementById("newUser")).value;
 	var email = (document.getElementById("newEmail")).value;
 	var password = (document.getElementById("newPassword")).value;
-	if(username=="" || email=="" || password=="" || !email.includes("@")){
-		alert("Sign-up failed");
+	if(username=="" || email=="" || password==""){
+		document.getElementById("status").style.color = "red";
+		document.getElementById("status").innerHTML = "Sign-up Failed";
 		return;
 	}
-
-    alert("Sign-up request sent! Your account will be created once approved by an admin");
+	if(!email.includes("@")){
+		document.getElementById("status").style.color = "red";
+		document.getElementById("status").innerHTML = "Sign-up Failed. Email needs '@'";
+		return;
+	}
+	document.getElementById("status").style.color = "green";
+	document.getElementById("status").innerHTML = "Sign-up request sent!";
   }
   let validate = () => {
+	document.getElementById("status").style.color = "white";
+	document.getElementById("status").innerHTML = "...";
+
 	var email = (document.getElementById("email")).value;
 	var password = (document.getElementById("password")).value;
 	console.log(email + " " + password);
 	if(email=="admin@gmail.com" && password=="password"){
+		document.getElementById("status").style.color = "green";
+		document.getElementById("status").innerHTML = "Login Attempt Successful";
+
 		window.location.replace("HomePage.html");
 	}
 	else{
-		alert("Login attempt failed. (P.S. the login is on github)");
+		document.getElementById("status").style.color = "red";
+		document.getElementById("status").innerHTML = "Login Attempt Failed";
 	}
 
   }
