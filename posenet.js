@@ -54,11 +54,18 @@ function setup() {
     });
     // console.log(poses);
     video.hide();
+
+    // ADD STUFF HERE
+    //
 }
 
 // runs each frame
 function draw() {
     image (video, 0, 0, width, height);
+    // We can call both functions to draw all keypoints and the skeletons
+    drawKeypoints();
+
+    // ADD STUFF HERE
 
     // process
     baseProcess();
@@ -73,9 +80,6 @@ function draw() {
 
     // update info display
     displayInfo();
-    
-    // We can call both functions to draw all keypoints and the skeletons
-    drawKeypoints();
 }
 function modelReady(){
     select("#status").html("");
@@ -134,7 +138,9 @@ function checkHeadTurn(){
         // REPORT
         info.headTurnRep.val++;
         headTurnSec = 0;
-        alert("Person #1 has been turning their head a suspicious number of times.");
+        // alert("Person #1 has been turning their head a suspicious number of times.");
+        addAlert("Person #1 has been turning their head a suspicious number of times.");
+        updateAlerts();
         sound.play();
     }
 }
@@ -153,9 +159,10 @@ function checkHandsUp() {
         handsUpTime += dt;
         if(handsUpTime >= 5){
             handsUpTime = 0;
-            alert("Person #1 has been holding their hands up for a suspicious amount of time.");
+            // alert("Person #1 has been holding their hands up for a suspicious amount of time.");
+            addAlert("Person #1 has been holding their hands up for a suspicious amount of time.");
+            updateAlerts();
             sound.play();
-
         }
     }
 }
@@ -172,12 +179,17 @@ function checkFall() {
     if (dHead >= 0.6 && fallDealy >= 2) {
         fallDealy = 0;
         info.fallRep.val++;
-        alert("Person #1 may have suspiciously fallen over.");
+        // alert("Person #1 may have suspiciously fallen over.");
+        addAlert("Person #1 may have suspiciously fallen over.");
+        updateAlerts();
+        sound.play();
     } else {
         fallDealy += dt;
     }
     console.log(dHead);
 }
+
+// DISPLAYS
 
 // display info
 function displayInfo() {
@@ -198,4 +210,23 @@ function displayInfo() {
         }
     }
     select("#info-body").html(temp);
+}
+
+// alert list
+let alerts = [];
+const alert_sz = 5;
+function updateAlerts() {
+    console.log(alerts);
+    let temp = "Events<br><br>";
+    for (let i = 0; i < alerts.length; i++) {
+        temp += alerts[i]+"<br>";
+    }
+    select("#alert-list").html(temp);
+}
+function addAlert(str) {
+    alerts.splice(0, alerts.length-alert_sz);
+    let date = new Date();
+    alerts.push(
+        date.getMonth()+"/"+date.getDay()+" "+date.getHours()+":"+date.getMinutes()+" - "+str
+    );
 }
