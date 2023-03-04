@@ -2,7 +2,6 @@
     "name": "tf-test",
     "version": "0.0.1",
     "dependencies": {
-        "@tensorflow-models/posenet": "^2.2.2",
-        "@tensorflow/tfjs": "^4.2.0"
+        
     }
 }
