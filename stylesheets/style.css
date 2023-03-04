@@ -1,7 +1,10 @@
+*{
+    overflow-x: hidden;
+}
 body{
     height: 100vh;
     margin: 0rem;
-    overflow-x: hidden;
+
     background-color: rgb(26, 26, 26) !important;
 }
 @keyframes rotate {
@@ -30,7 +33,7 @@ body{
         aquamarine,
         mediumpurple
     );
-    animation: rotate ease 20s infinite;
+    animation: rotate ease 7s infinite;
     z-index: -2;
     opacity: 100%;
 }
