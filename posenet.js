@@ -7,16 +7,20 @@ let first = true; // checks if its the first iteration
 // analysis
 let t = 0;
 let dt = 0;
-let headTurns = 0;
 let info = {
     headTurn: {
         name: "Head Turning",
+        show: true,
         val: 0,
-        trgVal: 0.001
+        format: function(x) {
+            return x > 0;
+        }
     },
-    headTurnSus: {
-        name: "Suspicious Head Turning",
+    headTurnRep: {
+        name: "Head Turning Reports",
+        show: true,
         val: 0,
+<<<<<<< HEAD
         trgVal: 1
     },
     handsUp: {
@@ -24,6 +28,10 @@ let info = {
         val: 0,
         trgVal: 0.001
     }
+=======
+        format: undefined
+    },
+>>>>>>> becdcdf913f18a21a5459dfe099ee08d09a35613
 };
 
 // runs on start
@@ -41,7 +49,7 @@ function setup() {
     poseNet.on("pose", function(results) {
         poses = results;
     });
-    console.log(poses);
+    // console.log(poses);
     video.hide();
 }
 
@@ -87,10 +95,11 @@ function baseProcess() {
     let t0 = t;
     t = performance.now()*0.001;
     dt = t-t0;
-    console.log("time: "+t+" "+dt);
+    // console.log("time: "+t+" "+dt);
 }
 
 // head turn
+let headTurnSec = 0;
 function checkHeadTurn(){
     // get input
     if(poses.length==0 || prevPose.length==0) return;
@@ -98,6 +107,7 @@ function checkHeadTurn(){
     let dRightEye = abs(poses[0].pose.rightEye.x-prevPose[0].pose.rightEye.x);
 
     // is turning?
+<<<<<<< HEAD
     {
         let currInfo = info.headTurn;
         if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
@@ -111,8 +121,21 @@ function checkHeadTurn(){
             currInfo.val = max(0, currInfo.val);
         }
         //console.log(dLeftEye + " " + dRightEye);
+=======
+    let iTurn = info.headTurn;
+    if(dLeftEye >= 15 && dLeftEye-dRightEye >= 5){ // check turn vs move
+        iTurn.val = 1;
+        headTurnSec += dt;
+    } else if(dRightEye >= 15 && dRightEye-dLeftEye >= 5){
+        iTurn.val = 1;
+        headTurnSec += dt;
+    } else {
+        iTurn.val = max(0, iTurn.val-dt);
+>>>>>>> becdcdf913f18a21a5459dfe099ee08d09a35613
     }
+    // console.log(dLeftEye + " " + dRightEye);
 
+<<<<<<< HEAD
     // turning significant?
     {
         let currInfo = info.headTurnSus;
@@ -125,6 +148,13 @@ function checkHeadTurn(){
             currInfo.val -= dt;
             currInfo.val = max(0, currInfo.val);
         }
+=======
+    // turn amount significant
+    if (headTurnSec >= 5) {
+        // REPORT
+        info.headTurnRep++;
+        headTurnSec = 0;
+>>>>>>> becdcdf913f18a21a5459dfe099ee08d09a35613
     }
 }
 function checkHandsUp(){
@@ -147,12 +177,17 @@ function displayInfo() {
     for (let key in info) {
         let elem = info[key];
         if (typeof(elem.name) != "string") {elem.name = "(invalid name) "+key;}
-        if (typeof(elem.val) != "number") {elem.val = 0;}
+        if (typeof(elem.show) != "boolean") {elem.show = false;}
 
         // add text
-        if (elem.val >= elem.trgVal) {temp += elem.name+": true";}
-        else {temp += elem.name+": false";}
-        temp += "\n";
+        if (elem.show) {
+            if (typeof(elem.format) == "function") {
+                temp += elem.name+": "+elem.format(elem.val);
+            } else {
+                temp += elem.name+": "+elem.val;
+            }
+            temp += "<br>";
+        }
     }
     select("#info-body").html(temp);
 }
