@@ -11,11 +11,13 @@ let headTurns = 0;
 let info = {
     headTurn: {
         name: "Head Turning",
-        val: 0
+        val: 0,
+        trgVal: 0.001
     },
     headTurnSus: {
         name: "Suspicious Head Turning",
-        val: 0
+        val: 0,
+        trgVal: 1
     }
 };
 
@@ -129,7 +131,7 @@ function displayInfo() {
         if (typeof(elem.val) != "number") {elem.val = 0;}
 
         // add text
-        if (elem.val > 0) {temp += elem.name+": true";}
+        if (elem.val >= elem.trgVal) {temp += elem.name+": true";}
         else {temp += elem.name+": false";}
         temp += "\n";
     }
