@@ -5,20 +5,26 @@
 	<link rel="stylesheet" type="text/css" href="slide navbar style.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
+<style>
+.center {
+  text-align: end;
+  border: 3px solid green;
+}
+
+</style>
+
 <body>
 	<div class="main">  	
-		<input type="checkbox" id="chk" aria-hidden="true">
-
+    		<input type="checkbox" id="chk" aria-hidden="true">
 			<div class="signup">
 				<form>
 					<label for="chk" aria-hidden="true">Sign up</label>
 					<input type="text" name="txt" placeholder="User name" required="">
 					<input type="email" name="email" placeholder="Email" required="">
 					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Sign up</button>
+					<button onclick="myFunction()">Sign up</button>
 				</form>
 			</div>
-
 			<div class="login">
 				<form>
 					<label for="chk" aria-hidden="true"">Login</label>
@@ -28,12 +34,17 @@
                 <form action="HomePage.html">
                     <button>Login</button>
                 </form>
-            
-			</div>
+			</div>    
 	</div>
 </body>
 </html>
+<script>
+  function myFunction() {
+    alert("Sign-up request sent!!!");
+  }
+</script>
 <style>
+    
     body{
 	margin: 0;
 	padding: 0;
@@ -42,8 +53,28 @@
 	align-items: center;
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
-	background: #ffffff
+	background: linear-gradient(to bottom, #212529, #212529, #4d535a);
+    background-size: 150%;
 }
+body {
+	background: linear-gradient(-45deg, #08090A, #212529, #575A5E, #222823);
+	background-size: 400% 400%;
+	animation: gradient 9s ease infinite;
+	height: 100vh;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
 .main{
 	width: 350px;
 	height: 500px;
@@ -62,7 +93,7 @@
 	height: 100%;
 }
 label{
-	color: #000000;
+	color: #fff;
 	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
@@ -105,13 +136,14 @@ button:hover{
 }
 .login{
 	height: 460px;
-	background: #eee;
+	background:#6f7275;
+    opacity: 1;
 	border-radius: 60% / 10%;
 	transform: translateY(-180px);
 	transition: .8s ease-in-out;
 }
 .login label{
-	color: #000000;
+	color: #fff;
 	transform: scale(.6);
 }
 
