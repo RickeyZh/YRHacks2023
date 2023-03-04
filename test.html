@@ -14,10 +14,81 @@
             text-align: center;
         }
     </style>
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Lato"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Arimo:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+        body {
+          color:#fff; 
+          font-family: "Monospace", sans-serif;
+        }
+        p {
+          color:#fff;
+          font-family: "Monospace", sans-serif;
+        }
+        .mySlides {
+          display: none;
+        }
+        .center {
+          font-family: "Tilt Warp", cursive;
+          text-align: right;
+          font-size: 29px;
+        }
+        .font {
+          font-family: "Tilt Warp", cursive;
+        }
+      </style>
 </head>
 <body>
+    <!--NAV BAR FROM HOMEPAGE-->
+    <div class="w3-top">
+        <div class="w3-bar w3-black w3-card">
+          <a
+            class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right"
+            href="javascript:void(0)"
+            onclick="myFunction()"
+            title="Toggle Navigation Menu"
+            ><i class="fa fa-bars"></i
+          ></a>
+          <a href="HomePage.html" class="w3-bar-item w3-button w3-padding-large">
+            <div class="font">HOME</div>
+          </a>
+          <a
+            href="test.html"
+            class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+            ><div class="font">CAMERA</div></a
+          >
+          <a
+            href="index.html"
+            class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+            ><div class="font">SIGN OUT</div></a
+          >
+          <a>
+            <div class="center" id="logo">IWitness&nbsp&nbsp&nbsp</div>
+          </a>
+          <a>
+            <link
+              href="https://unpkg.com/css.gg@2.0.0/icons/css/log-in.css"
+              rel="stylesheet"
+            />
+          </a>
+        </div>
+    </div>
+    <!--NAVBAR END-->
+
     <h1>PoseNet demo with M15.js</h1>
-    <p id="status">Loading Model...</p>
+    <p id="status">Loading...</p>
     <div id="videoContainer"></div>
     <!-- load the posenet.js file -->
     <script src="posenet.js"></script>
