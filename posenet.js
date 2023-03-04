@@ -150,8 +150,8 @@ function checkHandsUp() {
         info.handsUp.val = true;
         handsUpTime += dt;
         if(handsUpTime >= 5){
-            alert("Person #1 has been holding their hands up for a suspicious amount of time.");
             handsUpTime = 0;
+            alert("Person #1 has been holding their hands up for a suspicious amount of time.");
         }
     }
 }
@@ -168,6 +168,7 @@ function checkFall() {
     if (dHead >= 0.6 && fallDealy >= 2) {
         fallDealy = 0;
         info.fallRep.val++;
+        alert("Person #1 may have suspiciously fallen over.");
     } else {
         fallDealy += dt;
     }
